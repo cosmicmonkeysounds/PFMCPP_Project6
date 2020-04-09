@@ -81,8 +81,9 @@ struct MyStruct1                                //4
     T* compare(T* a, T* b )
     {
         if( a == nullptr || b == nullptr ) return nullptr; 
-        if( a->value < b->value ) return a;
-        if( a->value > b->value ) return b;
+        else if( a->value < b->value ) return a;
+        else if( a->value > b->value ) return b;
+        else return nullptr;
     } //5
       
 };
