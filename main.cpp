@@ -80,7 +80,7 @@ struct MyStruct1                                //4
 {
     T* compare(T* a, T* b )
     {
-        if( a != nullptr || b != nullptr )
+        if( a != nullptr && b != nullptr )
         {
             if( a->value < b->value ) return a;
             if( a->value > b->value ) return b;
@@ -96,7 +96,10 @@ struct U
 
     float multiplyMembers( float* newVal )      //12
     {
-        if( newVal == nullptr ) return 0.f; 
+        if( newVal == nullptr )
+        {
+            return 0.f; 
+        }
 
         std::cout << "My new member 1 value: " << this->member1 << std::endl;
         this->member1 = *newVal;
@@ -117,8 +120,11 @@ struct MyStruct2
 {
     static float multiplyStuff(U* that, float* newVal )        //10
     {
-        if( that == nullptr || newVal == nullptr ) return 0.f;
-
+        if( that == nullptr || newVal == nullptr )
+        {
+            return 0.f;
+        }
+        
         std::cout << "U's member 1 value: " << that->member1 << std::endl;
         that->member1 = *newVal;
         std::cout << "U's member 2 updated value: " << that->member1 << std::endl;
