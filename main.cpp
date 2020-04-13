@@ -57,16 +57,13 @@ struct U
 {
     float member1 { 0 }, member2 { 0 };
 
-    float multiplyMembers( float* newVal )      //12
+    float multiplyMembers( const float & newVal )      //12
     {
-        if( newVal == nullptr )
-        {
-            return 0.f; 
-        }
 
-        std::cout << "My new member 1 value: " << this->member1 << std::endl;
-        this->member1 = *newVal;
-        std::cout << "My new member 2 updated value: " << this->member1 << std::endl;
+        std::cout << "\nMy old member 1 value: " << this->member1 << std::endl;
+        this->member1 = newVal;
+        std::cout << "My new member 1 updated value: " << this->member1 << std::endl;
+        
         while( std::abs( this->member1 - this->member2) > 0.001f )
         {
             /*
@@ -81,25 +78,22 @@ struct U
 
 struct MyStruct2
 {
-    static float multiplyStuff(U* that, float* newVal )        //10
+    static float multiplyStuff( U & that, const float & newVal )        //10
     {
-        if( that == nullptr || newVal == nullptr )
-        {
-            return 0.f;
-        }
         
-        std::cout << "U's member 1 value: " << that->member1 << std::endl;
-        that->member1 = *newVal;
-        std::cout << "U's member 2 updated value: " << that->member1 << std::endl;
-        while( std::abs(that->member1 - that->member2) > 0.001f )
+        std::cout << "\nU's member 1 value: " << that.member1 << std::endl;
+        that.member1 = newVal;
+        std::cout << "U's member 1 updated value: " << that.member1 << std::endl;
+
+        while( std::abs(that.member1 - that.member2) > 0.001f )
         {
             /*
              write something that makes the distance between that-><#name2#> and that-><#name1#> get smaller
              */
-            that->member2 += 1;
+            that.member2 += 1;
         }
-        std::cout << "U's member 2 updated value: " << that->member2 << std::endl;
-        return that->member1 * that->member2;
+        std::cout << "U's member 2 updated value: " << that.member2 << std::endl;
+        return that.member1 * that.member2;
     }
 };
         
@@ -114,10 +108,10 @@ int main()
     
     U shelly;
     float updatedValue = 5.f;
-    std::cout << "[static func] Shelly's multiplied values: " << MyStruct2::multiplyStuff( &shelly, &updatedValue ) << std::endl;                  //11
+    std::cout << "[static func] Shelly's multiplied values: " << MyStruct2::multiplyStuff( shelly, updatedValue ) << std::endl;                  //11
     
     U ursla;
-    std::cout << "[member func] Ursla's multiplied values: " << ursla.multiplyMembers( &updatedValue ) << std::endl;
+    std::cout << "[member func] Ursla's multiplied values: " << ursla.multiplyMembers( updatedValue ) << std::endl;
 }
 
         
