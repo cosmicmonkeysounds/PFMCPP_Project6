@@ -59,10 +59,6 @@ struct U
 
     float multiplyMembers( const float & newVal )      //12
     {
-        if( newVal == 0.f )
-        {
-            return 0.f; 
-        }
 
         std::cout << "\nMy old member 1 value: " << this->member1 << std::endl;
         this->member1 = newVal;
@@ -84,10 +80,6 @@ struct MyStruct2
 {
     static float multiplyStuff( U & that, const float & newVal )        //10
     {
-        if( newVal == 0.f )
-        {
-            return 0.f;
-        }
         
         std::cout << "\nU's member 1 value: " << that.member1 << std::endl;
         that.member1 = newVal;
